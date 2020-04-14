@@ -10,20 +10,20 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:opentext.helloWorld"
+		"onCommand:extension.showShorthand"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-			  "command": "extension.showShortHand",
+			  "command": "extension.showShorthand",
 			  "title": "Generate Shorthand"
 			}
 		  ],
 		  "menus": {
 			"editor/context": [
 			  {
-				"command": "extension.showShortHand",
+				"command": "extension.showShorthand",
 				"when": "editorHasSelection"
 			  }
 			]

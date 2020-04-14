@@ -16,10 +16,18 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "opentext.helloWorld",
-				"title": "Hello World"
+			  "command": "extension.showShortHand",
+			  "title": "Generate Shorthand"
 			}
-		]
+		  ],
+		  "menus": {
+			"editor/context": [
+			  {
+				"command": "extension.showShortHand",
+				"when": "editorHasSelection"
+			  }
+			]
+		  }
 	},
 	"scripts": {
 		"lint": "eslint .",

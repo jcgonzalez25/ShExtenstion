@@ -8,6 +8,17 @@ const vscode = require('vscode');
 /**
  * @param {vscode.ExtensionContext} context
  */
+function validateData(data){
+	let MINIMUM_SHORTHAND_SIZE = 23;
+
+	return new Promise((resolve,reject)=>{
+		if(data.length <= MINIMUM_SHORTHAND_SIZE){
+			reject("SHORTHAND:ERROR:Minimum Size Failure");
+		}
+		resolve(data);
+	})
+}
+
 function activate(context) {
 	var Editor = vscode.window.activeTextEditor;
 	let Window = vscode.window;
@@ -23,7 +34,13 @@ function activate(context) {
 			Window.showErrorMessage("Something Went Wrong, Highlight and try again");
 		}
 		data = Editor.document.getText(CurrentSelection);
-		console.log(data);
+		try{
+			data = await validateData(data);
+		}catch(error){
+			Window.showErrorMessage(error)
+			console.error(error);
+		}
+		console.log("HIGHLIGHTED DATA:" + data);
 	});
 
 	context.subscriptions.push(disposable);

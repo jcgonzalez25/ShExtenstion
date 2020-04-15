@@ -9,15 +9,21 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-
+	var Editor = vscode.window.activeTextEditor;
 	let Window = vscode.window;
 	let CurrentSelection;
 	Window.onDidChangeTextEditorSelection(
-		({selections})=>{CurrentSelection=selections}
+		({selections})=>{CurrentSelection=selections[0]}
 	);
 
 	let disposable = vscode.commands.registerCommand('extension.showShorthand', async function () {
-		console.log(CurrentSelection);
+		let data;
+		if(typeof CurrentSelection === 'undefined'){
+			//ERROR: If highlighted before activate is triggered then will result in a error
+			Window.showErrorMessage("Something Went Wrong, Highlight and try again");
+		}
+		data = Editor.document.getText(CurrentSelection);
+		console.log(data);
 	});
 
 	context.subscriptions.push(disposable);

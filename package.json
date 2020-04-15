@@ -10,7 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.showShorthand"
+		"onCommand:extension.showShorthand",
+		"*"
 	],
 	"main": "./extension.js",
 	"contributes": {

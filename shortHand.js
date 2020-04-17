@@ -15,7 +15,7 @@ module.exports = {
     },
     convert:(data)=>{
         try{
-            let data = "<?xml version=\"1.0\"?><ShortHandXML><Elements><Element>"+data+"</Element></Elements></ShortHandXML>";
+            data = "<?xml version=\"1.0\"?><ShortHandXML><Elements><Element>"+data+"</Element></Elements></ShortHandXML>";
             let PostOptions = {
                 hostname: '10.0.24.236',
                 method:"GET",

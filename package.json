@@ -17,18 +17,18 @@
 	"contributes": {
 		"commands": [
 			{
-			  "command": "extension.showShorthand",
-			  "title": "Generate Shorthand"
-			}
-		  ],
-		  "menus": {
-			"editor/context": [
-			  {
 				"command": "extension.showShorthand",
-				"when": "editorHasSelection"
-			  }
+				"title": "Generate Shorthand"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "extension.showShorthand",
+					"when": "editorHasSelection"
+				}
 			]
-		  }
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",

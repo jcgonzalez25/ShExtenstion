@@ -1,24 +1,13 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-
+const Shorthand = require('./shortHand');
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
 /**
  * @param {vscode.ExtensionContext} context
  */
-function validateData(data){
-	let MINIMUM_SHORTHAND_SIZE = 23;
-
-	return new Promise((resolve,reject)=>{
-		if(data.length <= MINIMUM_SHORTHAND_SIZE){
-			reject("SHORTHAND:ERROR:Minimum Size Failure");
-		}
-		resolve(data);
-	})
-}
-
 function activate(context) {
 	var Editor = vscode.window.activeTextEditor;
 	let Window = vscode.window;
@@ -35,7 +24,7 @@ function activate(context) {
 		}
 		data = Editor.document.getText(CurrentSelection);
 		try{
-			data = await validateData(data);
+			data = await Shorthand.validate(data);
 		}catch(error){
 			Window.showErrorMessage(error)
 			console.error(error);

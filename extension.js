@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const Shorthand = require('./shortHand');
+const CdpHandler = require('./CdpHandler');
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -25,9 +26,8 @@ function activate(context) {
 		try{
 			data = await Shorthand.validate(data);
 			let CDPData = Shorthand.convert(data);
-			console.log(CDPData);
 		}catch(error){
-			Window.showErrorMessage(error)
+			Window.showErrorMessage(error);
 			console.error(error);
 		}
 		console.log("HIGHLIGHTED DATA:" + data);

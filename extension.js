@@ -14,7 +14,7 @@ function activate(context) {
 	let Window = vscode.window;
 	let CurrentSelection;
 	Window.onDidChangeTextEditorSelection(
-		({selections})=>{CurrentSelection=selections[0]}
+		({selections:[SelectionCoordinates]})=>{CurrentSelection=SelectionCoordinates}
 	);
 	let disposable = vscode.commands.registerCommand('extension.showShorthand', async function () {
 		let data;

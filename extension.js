@@ -15,7 +15,6 @@ function activate(context) {
 	Window.onDidChangeTextEditorSelection(
 		({selections})=>{CurrentSelection=selections[0]}
 	);
-
 	let disposable = vscode.commands.registerCommand('extension.showShorthand', async function () {
 		let data;
 		if(typeof CurrentSelection === 'undefined'){
@@ -25,6 +24,8 @@ function activate(context) {
 		data = Editor.document.getText(CurrentSelection);
 		try{
 			data = await Shorthand.validate(data);
+			let CDPData = Shorthand.convert(data);
+			console.log(CDPData);
 		}catch(error){
 			Window.showErrorMessage(error)
 			console.error(error);

@@ -1,7 +1,6 @@
 const http = require('http');
 
 let handleRequest = (data)=>{
-    console.log("in handle");
     data = "<?xml version=\"1.0\"?><ShortHandXML><Elements><Element>"+data+"</Element></Elements></ShortHandXML>";
     let PostOptions = {
         hostname: '10.0.24.236',
@@ -13,17 +12,15 @@ let handleRequest = (data)=>{
                 'Content-Length':Buffer.byteLength(data)
         } 
     };
-    let handleResponse = (res)=>{
-        res.setEncoding('utf8');
-        res.on("data",
-            function(data){
-                console.log(data);
-        });
-    };
-    let req = http.request(PostOptions,handleResponse);
-    req.write(data);
-
-
+    return new Promise((resolve,reject)=>{
+        let handleResponse = (res)=>{
+            res.setEncoding('utf8');
+            res.on("data",data=>resolve(data));
+        };
+        let req = http.request(PostOptions,handleResponse);
+        req.write(data);
+        req.end();
+    });
 }
 
 module.exports = {
@@ -37,9 +34,9 @@ module.exports = {
 		    resolve(data);
 	    })
         console.clear()
-        this.convert(data);
     },
-    convert:(data)=>{
-        handleRequest(data);
+    convert:async (data)=>{
+        data = await handleRequest(data);
+        console.log(data)
     }
 }
